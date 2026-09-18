@@ -17,20 +17,28 @@
           class="products__card"
           :style="{ animationDelay: `${0.06 * index}s` }"
         >
-          <figure class="products__media">
-            <img
-              :src="product.image"
-              :alt="product.alt"
-              width="320"
-              height="320"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-          <div class="products__body">
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.note }}</p>
-          </div>
+          <button
+            type="button"
+            class="products__open"
+            :aria-label="`Learn more about ${product.name}`"
+            @click="openProduct(product)"
+          >
+            <figure class="products__media">
+              <img
+                :src="product.image"
+                :alt="product.alt"
+                width="320"
+                height="320"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <div class="products__body">
+              <h3>{{ product.name }}</h3>
+              <p>{{ product.note }}</p>
+              <span class="products__more-link">Read more</span>
+            </div>
+          </button>
         </li>
       </ul>
 
@@ -39,11 +47,70 @@
         &amp; more local treasures
       </p>
     </div>
+
+    <dialog
+      ref="dialogEl"
+      class="products__dialog"
+      aria-labelledby="product-dialog-title"
+      @close="active = null"
+      @click="onBackdrop"
+    >
+      <article v-if="active" class="products__sheet">
+        <button
+          type="button"
+          class="products__close"
+          aria-label="Close"
+          @click="closeProduct"
+        >
+          <Icon name="mdi:close" aria-hidden="true" />
+        </button>
+        <img
+          class="products__dialog-image"
+          :src="active.image"
+          :alt="active.alt"
+          width="480"
+          height="480"
+        />
+        <div class="products__dialog-copy">
+          <p class="products__dialog-origin">{{ active.origin }}</p>
+          <h3 id="product-dialog-title">{{ active.name }}</h3>
+          <p class="products__dialog-note">{{ active.note }}</p>
+          <p class="products__dialog-text">{{ active.description }}</p>
+          <a
+            class="products__dialog-cta"
+            :href="brand.whatsappHref"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="mdi:whatsapp" aria-hidden="true" />
+            Ask on WhatsApp
+          </a>
+        </div>
+      </article>
+    </dialog>
   </section>
 </template>
 
 <script setup lang="ts">
-import { products } from '~/data/content'
+import { brand, products } from '~/data/content'
+
+type Product = (typeof products)[number]
+
+const dialogEl = ref<HTMLDialogElement | null>(null)
+const active = ref<Product | null>(null)
+
+function openProduct(product: Product) {
+  active.value = product
+  nextTick(() => dialogEl.value?.showModal())
+}
+
+function closeProduct() {
+  dialogEl.value?.close()
+}
+
+function onBackdrop(event: MouseEvent) {
+  if (event.target === dialogEl.value) closeProduct()
+}
 </script>
 
 <style lang="scss" scoped>
@@ -83,9 +150,20 @@ import { products } from '~/data/content'
   }
 
   &__card {
+    animation: fade-up 0.7s var(--ease-out) both;
+  }
+
+  &__open {
     display: grid;
     gap: 0.85rem;
-    animation: fade-up 0.7s var(--ease-out) both;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
   }
 
   &__media {
@@ -104,7 +182,8 @@ import { products } from '~/data/content'
     }
   }
 
-  &__card:hover &__media img {
+  &__open:hover &__media img,
+  &__open:focus-visible &__media img {
     transform: scale(1.04);
   }
 
@@ -126,6 +205,14 @@ import { products } from '~/data/content'
     }
   }
 
+  &__more-link {
+    display: inline-block;
+    margin-top: 0.45rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-leaf);
+  }
+
   &__more {
     display: inline-flex;
     align-items: center;
@@ -135,6 +222,104 @@ import { products } from '~/data/content'
     font-style: italic;
     font-size: 1.1rem;
     color: var(--color-leaf-deep);
+  }
+
+  &__dialog {
+    width: min(92vw, 52rem);
+    max-height: min(90vh, 40rem);
+    padding: 0;
+    border: 0;
+    border-radius: 1.25rem;
+    background: transparent;
+    overflow: hidden;
+
+    &::backdrop {
+      background: rgb(12 28 18 / 55%);
+      backdrop-filter: blur(4px);
+    }
+  }
+
+  &__sheet {
+    position: relative;
+    display: grid;
+    background: #fff;
+    color: var(--color-ink);
+
+    @media (min-width: 48rem) {
+      grid-template-columns: 0.95fr 1.05fr;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 0;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 88%);
+    color: var(--color-leaf-deep);
+    cursor: pointer;
+  }
+
+  &__dialog-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    max-height: 16rem;
+
+    @media (min-width: 48rem) {
+      max-height: none;
+      min-height: 100%;
+    }
+  }
+
+  &__dialog-copy {
+    padding: 1.35rem 1.35rem 1.5rem;
+  }
+
+  &__dialog-origin {
+    margin: 0 0 0.45rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-moss);
+  }
+
+  &__dialog-copy h3 {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    color: var(--color-leaf-deep);
+  }
+
+  &__dialog-note {
+    margin: 0 0 0.85rem;
+    font-style: italic;
+    color: var(--color-muted);
+  }
+
+  &__dialog-text {
+    margin: 0 0 1.25rem;
+    line-height: 1.55;
+    color: var(--color-ink);
+  }
+
+  &__dialog-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.6rem;
+    padding: 0.55rem 1rem;
+    border-radius: var(--radius-md);
+    background: #1f9b57;
+    color: #fff;
+    font-weight: 600;
   }
 }
 </style>
