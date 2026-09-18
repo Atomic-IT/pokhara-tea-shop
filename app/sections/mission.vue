@@ -17,17 +17,27 @@
         </ul>
       </div>
 
-      <div class="mission__visual" aria-hidden="true">
-        <div class="mission__sky" />
-        <div class="mission__sun" />
-        <div class="mission__peak mission__peak--far" />
-        <div class="mission__peak mission__peak--near" />
-        <div class="mission__terrace" />
-        <div class="mission__plant">
-          <span class="mission__leaf mission__leaf--l" />
-          <span class="mission__leaf mission__leaf--r" />
-          <span class="mission__stem" />
-        </div>
+      <div class="mission__visual">
+        <figure class="mission__shot mission__shot--main">
+          <img
+            src="/images/pokhara/tea-kanyam.jpg"
+            alt="Tea garden terraces in the hills of Nepal"
+            width="1284"
+            height="868"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <figure class="mission__shot mission__shot--side">
+          <img
+            src="/images/pokhara/harvest.jpg"
+            alt="Tea plucker harvesting fresh leaves on a hillside"
+            width="691"
+            height="922"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </div>
     </div>
   </section>
@@ -81,108 +91,51 @@ import { promises } from '~/data/content'
 
   &__visual {
     position: relative;
+    display: grid;
+    gap: 0.85rem;
+    min-height: 18rem;
+
+    @media (min-width: 40rem) {
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: end;
+    }
+  }
+
+  &__shot {
+    margin: 0;
     overflow: hidden;
-    min-height: 22rem;
-    border-radius: var(--radius-lg);
-    background: linear-gradient(180deg, #cfe6d8 0%, #9fc9ae 38%, #3f8a58 100%);
-  }
+    border-radius: 1.15rem;
+    background: var(--color-mist);
+    box-shadow: 0 0 0 1px rgb(31 92 58 / 8%);
 
-  &__sky {
-    position: absolute;
-    inset: 0 0 45%;
-    background:
-      radial-gradient(ellipse at 70% 20%, rgb(255 255 255 / 55%), transparent 55%),
-      linear-gradient(180deg, #dceee4, transparent);
-  }
-
-  &__sun {
-    position: absolute;
-    top: 14%;
-    right: 18%;
-    width: 4.5rem;
-    height: 4.5rem;
-    border-radius: 50%;
-    background: radial-gradient(circle, #f0d878 0%, #e8c96a 55%, transparent 70%);
-    animation: drift 8s ease-in-out infinite;
-  }
-
-  &__peak {
-    position: absolute;
-    bottom: 28%;
-    width: 0;
-    height: 0;
-    border-style: solid;
-
-    &--far {
-      left: 8%;
-      border-width: 0 7rem 9rem;
-      border-color: transparent transparent #6f9e7e transparent;
-      opacity: 0.85;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    &--near {
-      right: 6%;
-      border-width: 0 9rem 12rem;
-      border-color: transparent transparent #2d6a45 transparent;
-    }
-  }
-
-  &__terrace {
-    position: absolute;
-    inset: auto 0 0;
-    height: 34%;
-    background:
-      repeating-linear-gradient(
-        -8deg,
-        #1f5c3a 0 1.1rem,
-        #276843 1.1rem 2.2rem
-      );
-    clip-path: polygon(0 35%, 100% 0, 100% 100%, 0 100%);
-  }
-
-  &__plant {
-    position: absolute;
-    left: 18%;
-    bottom: 18%;
-    width: 4rem;
-    height: 5.5rem;
-    animation: leaf-sway 6s ease-in-out infinite;
-  }
-
-  &__stem {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 3px;
-    height: 3.2rem;
-    background: #163528;
-    transform: translateX(-50%);
-  }
-
-  &__leaf {
-    position: absolute;
-    width: 2.4rem;
-    height: 1.4rem;
-    border-radius: 80% 0;
-    background: linear-gradient(135deg, #5a9a6a, #1f5c3a);
-
-    &--l {
-      left: 0;
-      top: 0.6rem;
-      transform: rotate(-25deg);
+    &--main {
+      aspect-ratio: 4 / 3;
+      animation: drift 9s ease-in-out infinite;
     }
 
-    &--r {
-      right: 0;
-      top: 1.4rem;
-      transform: rotate(35deg) scaleX(-1);
+    &--side {
+      aspect-ratio: 3 / 4;
+      max-height: 22rem;
+
+      @media (min-width: 40rem) {
+        margin-bottom: 1.5rem;
+        animation: drift 11s ease-in-out infinite reverse;
+      }
     }
   }
 }
 
 @media (max-width: 40rem) {
-  .mission__visual {
-    min-height: 16rem;
+  .mission__shot--main,
+  .mission__shot--side {
+    animation: none;
   }
 }
 </style>
