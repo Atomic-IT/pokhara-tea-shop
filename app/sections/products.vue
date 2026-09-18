@@ -149,6 +149,20 @@ function onBackdrop(event: MouseEvent) {
 
   &__card {
     animation: fade-up 0.7s var(--ease-out) both;
+
+    @media (min-width: 40rem) and (max-width: 63.99rem) {
+      &:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        max-width: 22rem;
+        justify-self: center;
+      }
+    }
+
+    @media (min-width: 64rem) {
+      &:last-child:nth-child(3n + 1) {
+        grid-column: 2;
+      }
+    }
   }
 
   &__open {
