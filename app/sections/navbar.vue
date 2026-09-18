@@ -246,25 +246,29 @@ onUnmounted(() => {
   .navbar {
     &__toggle {
       display: flex;
+      z-index: 60;
     }
 
     &__links {
-      position: absolute;
-      inset: 4.25rem var(--container-px) auto;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
       flex-direction: column;
       align-items: stretch;
-      gap: 0.25rem;
-      padding: 0.85rem;
-      border-radius: var(--radius-lg);
-      background: rgb(255 255 255 / 96%);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--color-border);
+      justify-content: center;
+      gap: 0.35rem;
+      padding: 5.5rem var(--container-px) 2rem;
+      border-radius: 0;
+      background: rgb(247 250 247 / 98%);
+      backdrop-filter: blur(12px);
+      box-shadow: none;
+      border: 0;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-8px);
+      transform: translateY(-12px);
       transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+        opacity 0.28s ease,
+        transform 0.28s ease;
 
       &.is-open {
         opacity: 1;
@@ -273,13 +277,22 @@ onUnmounted(() => {
       }
 
       a {
-        padding: 0.7rem 0.85rem;
-        border-radius: var(--radius-sm);
+        padding: 0.95rem 1rem;
+        border-radius: var(--radius-md);
+        font-size: 1.15rem;
+        color: var(--color-leaf-deep);
+      }
+
+      .navbar__langs {
+        align-self: flex-start;
+        margin: 0.5rem 0.35rem;
       }
 
       .navbar__cta {
         justify-content: center;
-        margin-top: 0.35rem;
+        margin-top: 0.75rem;
+        min-height: 3rem;
+        font-size: 1.05rem;
       }
     }
   }
