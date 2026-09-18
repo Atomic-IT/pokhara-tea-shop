@@ -1,0 +1,13 @@
+name = "pokhara-tea-shop"
+main = ".output/server/index.mjs"
+compatibility_date = "2026-04-06"
+account_id = "7c5285307cec0088f9f25c2388e5558e"
+
+routes = [
+  "pokhara-tea-shop/*",
+  "www.pokhara-tea-shop/*"
+]
+
+[assets]
+directory = ".output/public"
+binding = "ASSETS"

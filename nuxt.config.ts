@@ -40,4 +40,17 @@ export default defineNuxtConfig({
       ],
     },
   },
+  nitro: {
+    preset: 'cloudflare_module',
+  },
+
+  vite: {
+    build: {
+      chunkSizeWarningLimit: 1600,
+      cssCodeSplit: false,
+      rollupOptions: {
+        maxParallelFileOps: 2,
+      },
+    },
+  },
 })
