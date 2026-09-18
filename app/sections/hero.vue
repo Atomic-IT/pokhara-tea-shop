@@ -30,6 +30,15 @@
       </p>
 
       <div class="hero__actions">
+        <a
+          class="btn btn--whatsapp"
+          :href="brand.whatsappHref"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="mdi:whatsapp" aria-hidden="true" />
+          WhatsApp
+        </a>
         <a class="btn btn--primary" href="#products">Explore products</a>
         <a class="btn btn--ghost" href="#contact">Talk with us</a>
       </div>
@@ -210,6 +219,16 @@ useHead({
   &--primary {
     background: var(--color-sun);
     color: #1a2e20;
+  }
+
+  &--whatsapp {
+    gap: 0.45rem;
+    background: #1f9b57;
+    color: #fff;
+
+    &:hover {
+      background: #178a4b;
+    }
   }
 
   &--ghost {

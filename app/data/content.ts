@@ -6,6 +6,9 @@ export const brand = {
   pillars: ['Fair Trade', 'Pure Goodness', 'Real Impact'] as const,
   phone: '+977 9804101078',
   phoneHref: 'tel:+9779804101078',
+  whatsapp: '+977 9804101078',
+  whatsappHref:
+    'https://wa.me/9779804101078?text=Hello%20Healthy%20Organic%20Teas',
   email: 'healthy.organicteas@gmail.com',
   emailHref: 'mailto:healthy.organicteas@gmail.com',
   facebook: 'https://www.facebook.com/HealthyOrganicTeas',
