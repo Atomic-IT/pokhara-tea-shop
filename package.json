@@ -1,0 +1,41 @@
+{
+  "name": "pokhara-tea",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "prepare": "husky",
+    "prepare:husky": "husky",
+    "check": "pnpm biome check .",
+    "write": "pnpm biome check --write .",
+    "slint": "pnpm stylelint \"**/**/*.scss\"",
+    "slint:fix": "pnpm stylelint \"**/**/*.scss\" --fix",
+    "tests": "pnpm vitest run",
+    "test:watch": "pnpm vitest",
+    "typeslint": "nuxt prepare && vue-tsc --noEmit -p .nuxt/tsconfig.json"
+  },
+  "dependencies": {
+    "@iconify-json/mdi": "^1.2.3",
+    "@nuxt/icon": "^2.5.1",
+    "nuxt": "^4.5.2",
+    "sass": "^1.104.1",
+    "vue": "^3.5.42",
+    "vue-router": "^5.3.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.6",
+    "husky": "9.1.7",
+    "stylelint": "16.19.1",
+    "stylelint-config-standard-scss": "14.0.0",
+    "typescript": "5.8.3",
+    "vitest": "3.2.0",
+    "vue-tsc": "2.2.10"
+  }
+}
