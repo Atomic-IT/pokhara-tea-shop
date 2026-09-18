@@ -11,6 +11,18 @@
       </div>
 
       <div class="contact__channels">
+        <a
+          class="contact__link contact__link--whatsapp"
+          :href="brand.whatsappHref"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="mdi:whatsapp" aria-hidden="true" />
+          <span>
+            <strong>WhatsApp</strong>
+            {{ brand.whatsapp }}
+          </span>
+        </a>
         <a class="contact__link" :href="brand.phoneHref">
           <Icon name="mdi:phone-outline" aria-hidden="true" />
           <span>
