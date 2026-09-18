@@ -1,0 +1,25 @@
+:root {
+  --color-leaf: #2d6a45;
+  --color-leaf-deep: #1f5c3a;
+  --color-leaf-soft: #3f8a58;
+  --color-moss: #5a9a6a;
+  --color-mist: #e8f2eb;
+  --color-fog: #f3f8f4;
+  --color-cream: #f7faf7;
+  --color-ink: #15241a;
+  --color-muted: #4a6354;
+  --color-honey: #c4a35a;
+  --color-sun: #e8c96a;
+  --color-surface: #fff;
+  --color-border: color-mix(in srgb, var(--color-leaf-deep) 14%, transparent);
+  --font-display: 'Fraunces', 'Georgia', 'Times New Roman', serif;
+  --font-body: 'Outfit', 'Segoe UI', sans-serif;
+  --radius-sm: 0.4rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --shadow-soft: 0 18px 40px rgb(21 36 26 / 8%);
+  --section-py: clamp(3.5rem, 8vw, 6rem);
+  --container-max: 1120px;
+  --container-px: clamp(1.1rem, 4vw, 1.75rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
