@@ -512,17 +512,79 @@ import { brand } from '~/data/content'
   }
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 48rem) {
   .hero {
-    &__vine--right,
-    &__watermark {
+    align-items: start;
+    min-height: unset;
+    height: auto;
+
+    &__vine,
+    &__watermark,
+    &__pillars,
+    &__ridges,
+    &__terraces,
+    &__steam {
       display: none;
     }
 
-    &__terraces {
-      right: 0;
-      opacity: 0.7;
+    &__sun {
+      top: 0.75rem;
+      left: auto;
+      right: 1.25rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      opacity: 0.85;
     }
+
+    &__mist {
+      height: 55%;
+      inset: 0 -10% auto;
+    }
+
+    &__content {
+      width: min(100% - 2 * var(--container-px), 36rem);
+      margin-inline: auto;
+      padding-block: 0.85rem 1.35rem;
+    }
+
+    &__place {
+      margin-bottom: 0.45rem;
+      font-size: 0.78rem;
+    }
+
+    &__brand {
+      margin-bottom: 0.45rem;
+    }
+
+    &__brand-main {
+      font-size: clamp(2.45rem, 11vw, 3.15rem);
+    }
+
+    &__brand-sub {
+      font-size: clamp(1.2rem, 5vw, 1.55rem);
+    }
+
+    &__headline {
+      margin-bottom: 0.45rem;
+      font-size: 1rem;
+    }
+
+    &__support {
+      margin-bottom: 0.95rem;
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+
+    &__actions {
+      margin-bottom: 0;
+      gap: 0.5rem;
+    }
+  }
+
+  .btn {
+    min-height: 2.45rem;
+    padding: 0.5rem 0.95rem;
+    font-size: 0.9rem;
   }
 }
 </style>
