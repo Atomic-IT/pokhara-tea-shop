@@ -3,6 +3,7 @@ export const brand = {
   shortName: 'Healthy Organic Teas',
   location: 'Pokhara, Nepal',
   tagline: 'From Local Hands With Honest Hearts',
+  secondaryBrand: 'A step local',
   pillars: ['Fair Trade', 'Pure Goodness', 'Real Impact'] as const,
   phone: '+977 9804101078',
   phoneHref: 'tel:+9779804101078',
@@ -11,9 +12,9 @@ export const brand = {
     'https://wa.me/9779804101078?text=Hello%20Healthy%20Organic%20Teas',
   email: 'healthy.organicteas@gmail.com',
   emailHref: 'mailto:healthy.organicteas@gmail.com',
-  facebook: 'https://www.facebook.com/HealthyOrganicTeas',
+  facebook: 'https://www.facebook.com/healthy.organicteas',
   facebookLabel: 'Healthy Organic Teas',
-  instagram: 'https://www.instagram.com/Healthy_organictea',
+  instagram: 'https://www.instagram.com/Healthy_organictea/',
   instagramLabel: '@Healthy_organictea',
 }
 

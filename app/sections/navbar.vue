@@ -12,6 +12,7 @@
         <span class="navbar__name">
           <strong>Healthy</strong>
           Organic Teas
+          <em>{{ brand.secondaryBrand }}</em>
         </span>
       </a>
 
@@ -49,6 +50,8 @@
 </template>
 
 <script setup lang="ts">
+import { brand } from '~/data/content'
+
 const menuOpen = ref(false)
 const scrolled = ref(false)
 
@@ -123,6 +126,16 @@ onUnmounted(() => {
       display: block;
       font-size: 1.2rem;
       font-weight: 700;
+    }
+
+    em {
+      display: block;
+      margin-top: 0.1rem;
+      font-size: 0.72rem;
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--color-moss);
     }
   }
 
