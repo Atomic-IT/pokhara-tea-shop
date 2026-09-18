@@ -36,42 +36,54 @@ export const values = [
 ] as const
 
 export const products = [
-  { id: 'tea', name: 'Tea', note: 'Fresh Himalayan leaves', icon: 'mdi:leaf' },
+  {
+    id: 'tea',
+    name: 'Tea',
+    note: 'Fresh Himalayan leaves',
+    image: '/images/products/tea.jpg',
+    alt: 'Loose green tea leaves in a ceramic bowl',
+  },
   {
     id: 'coffee',
     name: 'Coffee',
     note: 'Locally roasted beans',
-    icon: 'mdi:coffee-outline',
+    image: '/images/products/coffee.jpg',
+    alt: 'Roasted coffee beans in a wooden scoop',
   },
   {
     id: 'honey',
     name: 'Local Honey',
     note: 'Wildflower sweetness',
-    icon: 'mdi:bee',
+    image: '/images/products/honey.jpg',
+    alt: 'Jar of golden honey with a wooden dipper',
   },
   {
     id: 'mad-honey',
     name: 'Mad Honey',
     note: 'Rare mountain harvest',
-    icon: 'mdi:bottle-tonic-outline',
+    image: '/images/products/mad-honey.jpg',
+    alt: 'Jar of dark amber mad honey',
   },
   {
     id: 'silajit',
     name: 'Silajit',
     note: 'Mineral-rich resin',
-    icon: 'mdi:mountain',
+    image: '/images/products/silajit.jpg',
+    alt: 'Chunks of dark silajit resin',
   },
   {
     id: 'cordyceps',
     name: 'Cordyceps',
     note: 'Traditional tonic',
-    icon: 'mdi:mushroom-outline',
+    image: '/images/products/cordyceps.jpg',
+    alt: 'Dried cordyceps on linen',
   },
   {
     id: 'saffron',
     name: 'Saffron',
     note: 'Precious red threads',
-    icon: 'mdi:flower-outline',
+    image: '/images/products/saffron.jpg',
+    alt: 'Red saffron threads in a ceramic dish',
   },
 ] as const
 
