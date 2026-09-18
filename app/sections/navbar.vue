@@ -78,6 +78,7 @@ const links = computed(() => [
   { label: t('navValues'), href: '#values' },
   { label: t('navProducts'), href: '#products' },
   { label: t('navStory'), href: '#mission' },
+  { label: t('visitHeading'), href: '#visit' },
   { label: t('navContact'), href: '#contact' },
 ])
 
