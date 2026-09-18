@@ -43,6 +43,9 @@ export const products = [
     id: 'tea',
     name: 'Tea',
     note: 'Fresh Himalayan leaves',
+    description:
+      'Hand-picked leaves from highland gardens around Pokhara. Soft, clean cup with gentle floral notes — perfect morning or afternoon ritual.',
+    origin: 'Hill villages near Pokhara',
     image: '/images/products/tea.jpg',
     alt: 'Loose green tea leaves in a ceramic bowl',
   },
@@ -50,6 +53,9 @@ export const products = [
     id: 'coffee',
     name: 'Coffee',
     note: 'Locally roasted beans',
+    description:
+      'Small-batch Nepali beans roasted for balance — nutty aroma, medium body, and a smooth finish without harsh bitterness.',
+    origin: 'Local highland farms',
     image: '/images/products/coffee.jpg',
     alt: 'Roasted coffee beans in a wooden scoop',
   },
@@ -57,6 +63,9 @@ export const products = [
     id: 'honey',
     name: 'Local Honey',
     note: 'Wildflower sweetness',
+    description:
+      'Golden wildflower honey collected from village apiaries. Rich and floral — lovely in tea, on bread, or straight from the spoon.',
+    origin: 'Village beekeepers',
     image: '/images/products/honey.jpg',
     alt: 'Jar of golden honey with a wooden dipper',
   },
@@ -64,6 +73,9 @@ export const products = [
     id: 'mad-honey',
     name: 'Mad Honey',
     note: 'Rare mountain harvest',
+    description:
+      'Dark amber honey from high cliff rhododendron blooms. Intensely aromatic and traditionally prized — enjoy sparingly and with care.',
+    origin: 'High Himalayan cliffs',
     image: '/images/products/mad-honey.jpg',
     alt: 'Jar of dark amber mad honey',
   },
@@ -71,6 +83,9 @@ export const products = [
     id: 'silajit',
     name: 'Silajit',
     note: 'Mineral-rich resin',
+    description:
+      'Sticky mountain resin gathered from Himalayan rock faces. Earthy, mineral character used for generations as a traditional tonic.',
+    origin: 'Himalayan rock seams',
     image: '/images/products/silajit.jpg',
     alt: 'Chunks of dark silajit resin',
   },
@@ -78,6 +93,9 @@ export const products = [
     id: 'cordyceps',
     name: 'Cordyceps',
     note: 'Traditional tonic',
+    description:
+      'Dried Himalayan cordyceps valued in local wellness traditions. Warm, earthy profile — often steeped or used as a daily tonic.',
+    origin: 'High-altitude meadows',
     image: '/images/products/cordyceps.jpg',
     alt: 'Dried cordyceps on linen',
   },
@@ -85,6 +103,9 @@ export const products = [
     id: 'saffron',
     name: 'Saffron',
     note: 'Precious red threads',
+    description:
+      'Delicate crimson threads with honeyed aroma. A pinch colours rice, tea, and desserts — pure, fragrant, and carefully sourced.',
+    origin: 'Trusted regional growers',
     image: '/images/products/saffron.jpg',
     alt: 'Red saffron threads in a ceramic dish',
   },
