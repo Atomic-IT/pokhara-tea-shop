@@ -10,17 +10,24 @@
         </p>
       </div>
 
-      <ul class="products__list">
+      <ul class="products__grid">
         <li
           v-for="(product, index) in products"
           :key="product.id"
-          class="products__item"
-          :style="{ animationDelay: `${0.05 * index}s` }"
+          class="products__card"
+          :style="{ animationDelay: `${0.06 * index}s` }"
         >
-          <span class="products__icon">
-            <Icon :name="product.icon" size="1.45rem" aria-hidden="true" />
-          </span>
-          <div>
+          <figure class="products__media">
+            <img
+              :src="product.image"
+              :alt="product.alt"
+              width="320"
+              height="320"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <div class="products__body">
             <h3>{{ product.name }}</h3>
             <p>{{ product.note }}</p>
           </div>
@@ -42,7 +49,7 @@ import { products } from '~/data/content'
 <style lang="scss" scoped>
 .products {
   background:
-    linear-gradient(180deg, rgb(232 242 235 / 70%), rgb(243 248 244 / 30%));
+    linear-gradient(180deg, rgb(232 242 235 / 75%), rgb(243 248 244 / 35%));
 
   &__eyebrow {
     margin: 0 0 0.6rem;
@@ -57,34 +64,57 @@ import { products } from '~/data/content'
     max-width: 40rem;
   }
 
-  &__list {
+  &__grid {
     display: grid;
-    gap: 0.85rem;
+    gap: 1.15rem;
     margin: 2.5rem 0 1.5rem;
     padding: 0;
     list-style: none;
 
     @media (min-width: 40rem) {
       grid-template-columns: repeat(2, 1fr);
+      gap: 1.35rem;
     }
 
     @media (min-width: 64rem) {
       grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
     }
   }
 
-  &__item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.9rem;
-    padding: 1rem 0.2rem;
-    border-bottom: 1px solid var(--color-border);
+  &__card {
+    display: grid;
+    gap: 0.85rem;
     animation: fade-up 0.7s var(--ease-out) both;
+  }
+
+  &__media {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    aspect-ratio: 1;
+    background: var(--color-mist);
+    box-shadow: 0 0 0 1px rgb(31 92 58 / 8%);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s var(--ease-out);
+    }
+  }
+
+  &__card:hover &__media img {
+    transform: scale(1.04);
+  }
+
+  &__body {
+    padding-inline: 0.15rem;
 
     h3 {
       margin: 0 0 0.2rem;
       font-family: var(--font-display);
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 600;
       color: var(--color-leaf-deep);
     }
@@ -94,18 +124,6 @@ import { products } from '~/data/content'
       font-size: 0.95rem;
       color: var(--color-muted);
     }
-  }
-
-  &__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius: 50%;
-    color: var(--color-leaf);
-    background: rgb(45 106 69 / 10%);
   }
 
   &__more {
