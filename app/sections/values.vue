@@ -1,15 +1,16 @@
 <template>
   <section id="values" class="values section">
     <div class="container">
-      <p class="values__eyebrow">What we stand for</p>
-      <h2 class="section-heading">Good for people, nature, and you</h2>
-      <p class="section-lead">
-        Every jar, leaf, and spice we share carries the same promise printed on
-        our card: fair trade, pure goodness, real impact.
-      </p>
+      <p class="values__eyebrow">{{ t('valuesEyebrow') }}</p>
+      <h2 class="section-heading">{{ t('valuesHeading') }}</h2>
+      <p class="section-lead">{{ t('valuesLead') }}</p>
 
       <ul class="values__grid">
-        <li v-for="(item, index) in values" :key="item.id" class="values__item">
+        <li
+          v-for="(item, index) in localizedValues"
+          :key="item.id"
+          class="values__item"
+        >
           <span
             class="values__icon"
             :style="{ animationDelay: `${index * 0.2}s` }"
@@ -25,7 +26,28 @@
 </template>
 
 <script setup lang="ts">
-import { values } from '~/data/content'
+const { t } = useLocale()
+
+const localizedValues = computed(() => [
+  {
+    id: 'people',
+    title: t('valuePeopleTitle'),
+    text: t('valuePeopleText'),
+    icon: 'mdi:account-group-outline',
+  },
+  {
+    id: 'nature',
+    title: t('valueNatureTitle'),
+    text: t('valueNatureText'),
+    icon: 'mdi:leaf',
+  },
+  {
+    id: 'you',
+    title: t('valueYouTitle'),
+    text: t('valueYouText'),
+    icon: 'mdi:heart-outline',
+  },
+])
 </script>
 
 <style lang="scss" scoped>

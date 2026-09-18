@@ -2,12 +2,9 @@
   <section id="contact" class="contact section">
     <div class="contact__panel container">
       <div class="contact__copy">
-        <p class="contact__eyebrow">Say hello</p>
-        <h2 class="section-heading">Visit us in Pokhara — or write anytime</h2>
-        <p class="section-lead">
-          Curious about a product, wholesale, or a tasting? We are happy to
-          share what is fresh from the villages.
-        </p>
+        <p class="contact__eyebrow">{{ t('contactEyebrow') }}</p>
+        <h2 class="section-heading">{{ t('contactHeading') }}</h2>
+        <p class="section-lead">{{ t('contactLead') }}</p>
       </div>
 
       <div class="contact__channels">
@@ -19,21 +16,21 @@
         >
           <Icon name="mdi:whatsapp" aria-hidden="true" />
           <span>
-            <strong>WhatsApp</strong>
+            <strong>{{ t('whatsapp') }}</strong>
             {{ brand.whatsapp }}
           </span>
         </a>
         <a class="contact__link" :href="brand.phoneHref">
           <Icon name="mdi:phone-outline" aria-hidden="true" />
           <span>
-            <strong>Phone</strong>
+            <strong>{{ t('phone') }}</strong>
             {{ brand.phone }}
           </span>
         </a>
         <a class="contact__link" :href="brand.emailHref">
           <Icon name="mdi:email-outline" aria-hidden="true" />
           <span>
-            <strong>Email</strong>
+            <strong>{{ t('email') }}</strong>
             {{ brand.email }}
           </span>
         </a>
@@ -68,6 +65,8 @@
 
 <script setup lang="ts">
 import { brand } from '~/data/content'
+
+const { t } = useLocale()
 </script>
 
 <style lang="scss" scoped>
@@ -160,6 +159,19 @@ import { brand } from '~/data/content'
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: rgb(244 250 246 / 65%);
+    }
+
+    &--whatsapp {
+      background: rgb(31 155 87 / 28%);
+      border-color: rgb(31 155 87 / 45%);
+
+      .iconify {
+        color: #7dffb0;
+      }
+
+      &:hover {
+        background: rgb(31 155 87 / 40%);
+      }
     }
   }
 }

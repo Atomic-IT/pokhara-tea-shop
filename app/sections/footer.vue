@@ -31,9 +31,7 @@
         </a>
       </div>
 
-      <p class="footer__note">
-        Fair trade · Pure goodness · Real impact — from {{ brand.location }}.
-      </p>
+      <p class="footer__note">{{ t('footerNote') }}</p>
 
       <p class="footer__copy">
         © {{ year }} {{ brand.name }}. All rights reserved.
@@ -45,6 +43,7 @@
 <script setup lang="ts">
 import { brand } from '~/data/content'
 
+const { t } = useLocale()
 const year = new Date().getFullYear()
 </script>
 
