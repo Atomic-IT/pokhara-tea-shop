@@ -2,12 +2,9 @@
   <section id="products" class="products section">
     <div class="container">
       <div class="products__intro">
-        <p class="products__eyebrow">Our premium products</p>
-        <h2 class="section-heading">Himalayan treasures, honestly sourced</h2>
-        <p class="section-lead">
-          From tea gardens to mountain resins — authentic local goods, and more
-          treasures from the communities we work with.
-        </p>
+        <p class="products__eyebrow">{{ t('productsEyebrow') }}</p>
+        <h2 class="section-heading">{{ t('productsHeading') }}</h2>
+        <p class="section-lead">{{ t('productsLead') }}</p>
       </div>
 
       <ul class="products__grid">
@@ -20,7 +17,7 @@
           <button
             type="button"
             class="products__open"
-            :aria-label="`Learn more about ${product.name}`"
+            :aria-label="`${t('readMore')} ${product.name}`"
             @click="openProduct(product)"
           >
             <figure class="products__media">
@@ -36,7 +33,7 @@
             <div class="products__body">
               <h3>{{ product.name }}</h3>
               <p>{{ product.note }}</p>
-              <span class="products__more-link">Read more</span>
+              <span class="products__more-link">{{ t('readMore') }}</span>
             </div>
           </button>
         </li>
@@ -44,7 +41,7 @@
 
       <p class="products__more">
         <Icon name="mdi:spa-outline" aria-hidden="true" />
-        &amp; more local treasures
+        {{ t('moreTreasures') }}
       </p>
     </div>
 
@@ -59,7 +56,7 @@
         <button
           type="button"
           class="products__close"
-          aria-label="Close"
+          :aria-label="t('close')"
           @click="closeProduct"
         >
           <Icon name="mdi:close" aria-hidden="true" />
@@ -83,7 +80,7 @@
             rel="noopener noreferrer"
           >
             <Icon name="mdi:whatsapp" aria-hidden="true" />
-            Ask on WhatsApp
+            {{ t('askWhatsapp') }}
           </a>
         </div>
       </article>
@@ -96,6 +93,7 @@ import { brand, products } from '~/data/content'
 
 type Product = (typeof products)[number]
 
+const { t } = useLocale()
 const dialogEl = ref<HTMLDialogElement | null>(null)
 const active = ref<Product | null>(null)
 

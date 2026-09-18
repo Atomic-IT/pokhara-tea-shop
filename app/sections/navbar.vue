@@ -21,7 +21,7 @@
         class="navbar__toggle"
         :aria-expanded="menuOpen"
         aria-controls="nav-panel"
-        :aria-label="menuOpen ? 'Close menu' : 'Open menu'"
+        :aria-label="menuOpen ? t('closeMenu') : t('openMenu')"
         @click="menuOpen = !menuOpen"
       >
         <span /><span /><span />
@@ -41,8 +41,26 @@
         >
           {{ link.label }}
         </a>
+        <div class="navbar__langs" role="group" aria-label="Language">
+          <button
+            type="button"
+            class="navbar__lang"
+            :class="{ 'is-active': locale === 'en' }"
+            @click="setLocale('en')"
+          >
+            {{ t('langEn') }}
+          </button>
+          <button
+            type="button"
+            class="navbar__lang"
+            :class="{ 'is-active': locale === 'ne' }"
+            @click="setLocale('ne')"
+          >
+            {{ t('langNe') }}
+          </button>
+        </div>
         <a class="navbar__cta" href="#contact" @click="closeMenu">
-          Get in touch
+          {{ t('navCta') }}
         </a>
       </nav>
     </div>
@@ -52,15 +70,16 @@
 <script setup lang="ts">
 import { brand } from '~/data/content'
 
+const { locale, t, setLocale } = useLocale()
 const menuOpen = ref(false)
 const scrolled = ref(false)
 
-const links = [
-  { label: 'Values', href: '#values' },
-  { label: 'Products', href: '#products' },
-  { label: 'Our story', href: '#mission' },
-  { label: 'Contact', href: '#contact' },
-]
+const links = computed(() => [
+  { label: t('navValues'), href: '#values' },
+  { label: t('navProducts'), href: '#products' },
+  { label: t('navStory'), href: '#mission' },
+  { label: t('navContact'), href: '#contact' },
+])
 
 function closeMenu() {
   menuOpen.value = false
@@ -191,6 +210,33 @@ onUnmounted(() => {
     &:hover {
       background: var(--color-leaf) !important;
       transform: translateY(-1px);
+    }
+  }
+
+  &__langs {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.2rem;
+    border-radius: 999px;
+    background: rgb(31 92 58 / 8%);
+  }
+
+  &__lang {
+    min-width: 2.2rem;
+    height: 1.85rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+
+    &.is-active {
+      background: var(--color-leaf-deep);
+      color: #fff;
     }
   }
 }

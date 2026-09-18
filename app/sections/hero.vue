@@ -15,19 +15,16 @@
     <div class="hero__content container">
       <p class="hero__place">
         <Icon name="mdi:map-marker-outline" aria-hidden="true" />
-        {{ brand.location }}
+        {{ t('place') }}
       </p>
 
       <h1 class="hero__brand">
-        <span class="hero__brand-main">Healthy</span>
-        <span class="hero__brand-sub">Organic Teas</span>
+        <span class="hero__brand-main">{{ t('brandMain') }}</span>
+        <span class="hero__brand-sub">{{ t('brandSub') }}</span>
       </h1>
 
-      <p class="hero__headline">{{ brand.tagline }}</p>
-      <p class="hero__support">
-        We collect directly from villagers and promote local products —
-        empowering communities and preserving tradition.
-      </p>
+      <p class="hero__headline">{{ t('tagline') }}</p>
+      <p class="hero__support">{{ t('heroSupport') }}</p>
 
       <div class="hero__actions">
         <a
@@ -37,10 +34,12 @@
           rel="noopener noreferrer"
         >
           <Icon name="mdi:whatsapp" aria-hidden="true" />
-          WhatsApp
+          {{ t('whatsapp') }}
         </a>
-        <a class="btn btn--primary" href="#products">Explore products</a>
-        <a class="btn btn--ghost" href="#contact">Talk with us</a>
+        <a class="btn btn--primary" href="#products"
+          >{{ t('exploreProducts') }}</a
+        >
+        <a class="btn btn--ghost" href="#contact">{{ t('talkWithUs') }}</a>
       </div>
 
       <ul class="hero__pillars" aria-label="Our promise">
@@ -52,6 +51,8 @@
 
 <script setup lang="ts">
 import { brand } from '~/data/content'
+
+const { t } = useLocale()
 
 useHead({
   link: [

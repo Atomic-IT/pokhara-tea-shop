@@ -2,12 +2,9 @@
   <section id="mission" class="mission section">
     <div class="mission__layout container">
       <div class="mission__copy">
-        <p class="mission__eyebrow">Directly from villagers</p>
-        <h2 class="section-heading">Fair trade with honest hearts</h2>
-        <p class="section-lead">
-          We work directly with local communities to bring you authentic,
-          high-quality products while supporting their livelihood.
-        </p>
+        <p class="mission__eyebrow">{{ t('missionEyebrow') }}</p>
+        <h2 class="section-heading">{{ t('missionHeading') }}</h2>
+        <p class="section-lead">{{ t('missionLead') }}</p>
 
         <ul class="mission__promises">
           <li v-for="promise in promises" :key="promise">
@@ -45,6 +42,8 @@
 
 <script setup lang="ts">
 import { promises } from '~/data/content'
+
+const { t } = useLocale()
 </script>
 
 <style lang="scss" scoped>
