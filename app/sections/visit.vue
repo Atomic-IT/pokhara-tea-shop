@@ -9,31 +9,43 @@
           <Icon name="mdi:calendar-clock" aria-hidden="true" />
           {{ t('visitNote') }}
         </p>
-        <a
-          class="visit__cta"
-          :href="brand.whatsappHref"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon name="mdi:whatsapp" aria-hidden="true" />
-          {{ t('whatsapp') }}
-        </a>
+        <div class="visit__actions">
+          <a
+            class="visit__cta visit__cta--whatsapp"
+            :href="brand.whatsappHref"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="mdi:whatsapp" aria-hidden="true" />
+            {{ t('whatsapp') }}
+          </a>
+          <a
+            class="visit__cta visit__cta--maps"
+            :href="brand.mapsHref"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="mdi:map-marker-outline" aria-hidden="true" />
+            {{ t('googleMaps') }}
+          </a>
+        </div>
       </div>
 
       <div class="visit__map">
         <iframe
-          title="Map of Lakeside, Pokhara"
+          :title="brand.address"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.openstreetmap.org/export/embed.html?bbox=83.945%2C28.200%2C83.970%2C28.220&amp;layer=mapnik&amp;marker=28.2096%2C83.9556"
+          allowfullscreen
+          :src="brand.mapsEmbedHref"
         />
         <a
           class="visit__map-link"
-          href="https://www.openstreetmap.org/?mlat=28.2096&amp;mlon=83.9556#map=15/28.2096/83.9556"
+          :href="brand.mapsHref"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Open larger map
+          {{ t('openMap') }}
         </a>
       </div>
     </div>
@@ -71,16 +83,25 @@ const { t } = useLocale()
   }
 
   &__note {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 0.45rem;
-    margin: 1.25rem 0 1.35rem;
+    margin: 1.25rem 0 0;
     font-weight: 500;
     color: var(--color-ink);
 
     .iconify {
       color: var(--color-leaf);
+      flex-shrink: 0;
     }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-top: 1.15rem;
   }
 
   &__cta {
@@ -90,9 +111,22 @@ const { t } = useLocale()
     min-height: 2.7rem;
     padding: 0.6rem 1.1rem;
     border-radius: var(--radius-md);
-    background: #1f9b57;
-    color: #fff;
     font-weight: 600;
+
+    &--whatsapp {
+      background: #1f9b57;
+      color: #fff;
+    }
+
+    &--maps {
+      background: transparent;
+      color: var(--color-leaf-deep);
+      box-shadow: inset 0 0 0 1.5px rgb(31 92 58 / 28%);
+
+      &:hover {
+        background: rgb(31 92 58 / 6%);
+      }
+    }
   }
 
   &__map {

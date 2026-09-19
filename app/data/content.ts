@@ -16,6 +16,12 @@ export const brand = {
   facebookLabel: 'Healthy Organic Teas',
   instagram: 'https://www.instagram.com/Healthy_organictea/',
   instagramLabel: '@Healthy_organictea',
+  address: 'Devistan Margha, Lakeside Rd, Pokhara, Gandaki Province 33700',
+  mapsLabel: 'Devistan Margha, Lakeside Rd',
+  mapsHref:
+    'https://www.google.com/maps/search/?api=1&query=Healthy+Organic+Teas+Devistan+Margha+Lakeside+Rd+Pokhara',
+  mapsEmbedHref:
+    'https://maps.google.com/maps?q=Healthy+Organic+Teas%2C+Devistan+Margha%2C+Lakeside+Rd%2C+Pokhara&z=17&output=embed',
 }
 
 export const values = [

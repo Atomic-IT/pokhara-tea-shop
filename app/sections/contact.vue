@@ -7,57 +7,68 @@
         <p class="section-lead">{{ t('contactLead') }}</p>
       </div>
 
-      <div class="contact__channels">
-        <a
-          class="contact__link contact__link--whatsapp"
-          :href="brand.whatsappHref"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon name="mdi:whatsapp" aria-hidden="true" />
-          <span>
-            <strong>{{ t('whatsapp') }}</strong>
-            {{ brand.whatsapp }}
-          </span>
-        </a>
-        <a class="contact__link" :href="brand.phoneHref">
-          <Icon name="mdi:phone-outline" aria-hidden="true" />
-          <span>
-            <strong>{{ t('phone') }}</strong>
-            {{ brand.phone }}
-          </span>
-        </a>
-        <a class="contact__link" :href="brand.emailHref">
-          <Icon name="mdi:email-outline" aria-hidden="true" />
-          <span>
-            <strong>{{ t('email') }}</strong>
-            {{ brand.email }}
-          </span>
-        </a>
-        <a
-          class="contact__link"
-          :href="brand.facebook"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon name="mdi:facebook" aria-hidden="true" />
-          <span>
-            <strong>Facebook</strong>
-            {{ brand.facebookLabel }}
-          </span>
-        </a>
-        <a
-          class="contact__link"
-          :href="brand.instagram"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon name="mdi:instagram" aria-hidden="true" />
-          <span>
-            <strong>Instagram</strong>
-            {{ brand.instagramLabel }}
-          </span>
-        </a>
+      <div class="contact__aside">
+        <div class="contact__channels">
+          <a class="contact__link" :href="brand.phoneHref">
+            <Icon name="mdi:phone-outline" aria-hidden="true" />
+            <span>
+              <strong>{{ t('phone') }}</strong>
+              {{ brand.phone }}
+            </span>
+          </a>
+          <a class="contact__link" :href="brand.emailHref">
+            <Icon name="mdi:email-outline" aria-hidden="true" />
+            <span>
+              <strong>{{ t('email') }}</strong>
+              {{ brand.email }}
+            </span>
+          </a>
+          <a
+            class="contact__link"
+            :href="brand.mapsHref"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="mdi:map-marker-outline" aria-hidden="true" />
+            <span>
+              <strong>{{ t('googleMaps') }}</strong>
+              {{ brand.address }}
+            </span>
+          </a>
+        </div>
+
+        <div class="contact__socials" role="list">
+          <a
+            class="contact__social contact__social--whatsapp"
+            :href="brand.whatsappHref"
+            target="_blank"
+            rel="noopener noreferrer"
+            :aria-label="t('whatsapp')"
+            role="listitem"
+          >
+            <Icon name="mdi:whatsapp" aria-hidden="true" />
+          </a>
+          <a
+            class="contact__social"
+            :href="brand.facebook"
+            target="_blank"
+            rel="noopener noreferrer"
+            :aria-label="brand.facebookLabel"
+            role="listitem"
+          >
+            <Icon name="mdi:facebook" aria-hidden="true" />
+          </a>
+          <a
+            class="contact__social"
+            :href="brand.instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+            :aria-label="brand.instagramLabel"
+            role="listitem"
+          >
+            <Icon name="mdi:instagram" aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -118,10 +129,15 @@ const { t } = useLocale()
     color: rgb(244 250 246 / 82%);
   }
 
+  &__aside {
+    display: grid;
+    gap: 1rem;
+    position: relative;
+  }
+
   &__channels {
     display: grid;
     gap: 0.75rem;
-    position: relative;
   }
 
   &__link {
@@ -160,17 +176,45 @@ const { t } = useLocale()
       text-transform: uppercase;
       color: rgb(244 250 246 / 65%);
     }
+  }
+
+  &__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  &__social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 10%);
+    border: 1px solid rgb(255 255 255 / 14%);
+    color: var(--color-sun);
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease,
+      color 0.2s ease;
+
+    .iconify {
+      font-size: 1.35rem;
+    }
+
+    &:hover {
+      background: rgb(255 255 255 / 18%);
+      transform: translateY(-2px);
+    }
 
     &--whatsapp {
       background: rgb(31 155 87 / 28%);
       border-color: rgb(31 155 87 / 45%);
-
-      .iconify {
-        color: #7dffb0;
-      }
+      color: #7dffb0;
 
       &:hover {
-        background: rgb(31 155 87 / 40%);
+        background: rgb(31 155 87 / 42%);
       }
     }
   }

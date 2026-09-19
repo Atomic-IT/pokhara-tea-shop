@@ -9,7 +9,7 @@
 
       <ul class="products__grid">
         <li
-          v-for="(product, index) in products"
+          v-for="(product, index) in localizedProducts"
           :key="product.id"
           class="products__card"
           :style="{ animationDelay: `${0.06 * index}s` }"
@@ -90,14 +90,86 @@
 
 <script setup lang="ts">
 import { brand, products } from '~/data/content'
+import type { MessageKey } from '~/data/messages'
 
-type Product = (typeof products)[number]
+type LocalizedProduct = {
+  id: (typeof products)[number]['id']
+  name: string
+  note: string
+  description: string
+  origin: string
+  image: string
+  alt: string
+}
 
 const { t } = useLocale()
 const dialogEl = ref<HTMLDialogElement | null>(null)
-const active = ref<Product | null>(null)
+const active = ref<LocalizedProduct | null>(null)
 
-function openProduct(product: Product) {
+const productKeys = {
+  tea: {
+    name: 'productTeaName',
+    note: 'productTeaNote',
+    description: 'productTeaDescription',
+    origin: 'productTeaOrigin',
+  },
+  coffee: {
+    name: 'productCoffeeName',
+    note: 'productCoffeeNote',
+    description: 'productCoffeeDescription',
+    origin: 'productCoffeeOrigin',
+  },
+  honey: {
+    name: 'productHoneyName',
+    note: 'productHoneyNote',
+    description: 'productHoneyDescription',
+    origin: 'productHoneyOrigin',
+  },
+  'mad-honey': {
+    name: 'productMadHoneyName',
+    note: 'productMadHoneyNote',
+    description: 'productMadHoneyDescription',
+    origin: 'productMadHoneyOrigin',
+  },
+  silajit: {
+    name: 'productSilajitName',
+    note: 'productSilajitNote',
+    description: 'productSilajitDescription',
+    origin: 'productSilajitOrigin',
+  },
+  cordyceps: {
+    name: 'productCordycepsName',
+    note: 'productCordycepsNote',
+    description: 'productCordycepsDescription',
+    origin: 'productCordycepsOrigin',
+  },
+  saffron: {
+    name: 'productSaffronName',
+    note: 'productSaffronNote',
+    description: 'productSaffronDescription',
+    origin: 'productSaffronOrigin',
+  },
+} as const satisfies Record<
+  (typeof products)[number]['id'],
+  Record<'name' | 'note' | 'description' | 'origin', MessageKey>
+>
+
+const localizedProducts = computed(() =>
+  products.map((product) => {
+    const keys = productKeys[product.id]
+    return {
+      id: product.id,
+      image: product.image,
+      alt: product.alt,
+      name: t(keys.name),
+      note: t(keys.note),
+      description: t(keys.description),
+      origin: t(keys.origin),
+    }
+  })
+)
+
+function openProduct(product: LocalizedProduct) {
   active.value = product
   nextTick(() => dialogEl.value?.showModal())
 }

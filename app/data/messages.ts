@@ -51,12 +51,49 @@ export const messages = {
     email: 'Email',
     visitHeading: 'Visit us in Pokhara',
     visitLead:
-      'Meet by appointment in Lakeside, Pokhara. Message us on WhatsApp to arrange a tasting or pickup.',
-    visitNote: 'Meet by appointment · Lakeside area',
+      'Meet by appointment at Devistan Margha, Lakeside Rd, Pokhara. Message us on WhatsApp to arrange a tasting or pickup.',
+    visitNote: 'Meet by appointment · Devistan Margha, Lakeside',
+    googleMaps: 'Google Maps',
+    openMap: 'Open in Google Maps',
     footerNote:
       'Fair trade · Pure goodness · Real impact — from Pokhara, Nepal.',
     langEn: 'EN',
     langNe: 'NE',
+    productTeaName: 'Tea',
+    productTeaNote: 'Fresh Himalayan leaves',
+    productTeaDescription:
+      'Hand-picked leaves from highland gardens around Pokhara. Soft, clean cup with gentle floral notes — perfect morning or afternoon ritual.',
+    productTeaOrigin: 'Hill villages near Pokhara',
+    productCoffeeName: 'Coffee',
+    productCoffeeNote: 'Locally roasted beans',
+    productCoffeeDescription:
+      'Small-batch Nepali beans roasted for balance — nutty aroma, medium body, and a smooth finish without harsh bitterness.',
+    productCoffeeOrigin: 'Local highland farms',
+    productHoneyName: 'Local Honey',
+    productHoneyNote: 'Wildflower sweetness',
+    productHoneyDescription:
+      'Golden wildflower honey collected from village apiaries. Rich and floral — lovely in tea, on bread, or straight from the spoon.',
+    productHoneyOrigin: 'Village beekeepers',
+    productMadHoneyName: 'Mad Honey',
+    productMadHoneyNote: 'Rare mountain harvest',
+    productMadHoneyDescription:
+      'Dark amber honey from high cliff rhododendron blooms. Intensely aromatic and traditionally prized — enjoy sparingly and with care.',
+    productMadHoneyOrigin: 'High Himalayan cliffs',
+    productSilajitName: 'Silajit',
+    productSilajitNote: 'Mineral-rich resin',
+    productSilajitDescription:
+      'Sticky mountain resin gathered from Himalayan rock faces. Earthy, mineral character used for generations as a traditional tonic.',
+    productSilajitOrigin: 'Himalayan rock seams',
+    productCordycepsName: 'Cordyceps',
+    productCordycepsNote: 'Traditional tonic',
+    productCordycepsDescription:
+      'Dried Himalayan cordyceps valued in local wellness traditions. Warm, earthy profile — often steeped or used as a daily tonic.',
+    productCordycepsOrigin: 'High-altitude meadows',
+    productSaffronName: 'Saffron',
+    productSaffronNote: 'Precious red threads',
+    productSaffronDescription:
+      'Delicate crimson threads with honeyed aroma. A pinch colours rice, tea, and desserts — pure, fragrant, and carefully sourced.',
+    productSaffronOrigin: 'Trusted regional growers',
   },
   ne: {
     navValues: 'मूल्यहरू',
@@ -108,11 +145,48 @@ export const messages = {
     email: 'इमेल',
     visitHeading: 'पोखरामा भेट्नुहोस्',
     visitLead:
-      'लेकसाइड, पोखरामा अपोइन्टमेन्टअनुसार भेटौं। स्वाद परीक्षण वा लिनका लागि WhatsApp मा सन्देश पठाउनुहोस्।',
-    visitNote: 'अपोइन्टमेन्टअनुसार · लेकसाइड क्षेत्र',
+      'देविस्थान मार्ग, लेकसाइड रोड, पोखरामा अपोइन्टमेन्टअनुसार भेटौं। स्वाद परीक्षण वा लिनका लागि WhatsApp मा सन्देश पठाउनुहोस्।',
+    visitNote: 'अपोइन्टमेन्टअनुसार · देविस्थान मार्ग, लेकसाइड',
+    googleMaps: 'गुगल म्याप्स',
+    openMap: 'गुगल म्याप्समा खोल्नुहोस्',
     footerNote: 'निष्पक्ष व्यापार · शुद्ध गुणस्तर · वास्तविक प्रभाव — पोखरा, नेपालबाट।',
     langEn: 'EN',
     langNe: 'NE',
+    productTeaName: 'चिया',
+    productTeaNote: 'ताजा हिमाली पातहरू',
+    productTeaDescription:
+      'पोखरा वरपरका पहाडी बगानबाट हातले टिपिएका पात। नरम, सफा स्वाद र हल्का फूलको सुगन्ध — बिहान वा दिउँसोको उत्तम साथी।',
+    productTeaOrigin: 'पोखरा नजिकका पहाडी गाउँहरू',
+    productCoffeeName: 'कफी',
+    productCoffeeNote: 'स्थानीय भुटाइका दाना',
+    productCoffeeDescription:
+      'सन्तुलनका लागि भुटिएका नेपाली दाना — बदामको सुगन्ध, मध्यम बडी र चिल्लो स्वाद बिना कडा तितोपन।',
+    productCoffeeOrigin: 'स्थानीय पहाडी फार्महरू',
+    productHoneyName: 'स्थानीय मह',
+    productHoneyNote: 'जंगली फूलको मिठास',
+    productHoneyDescription:
+      'गाउँका मौरीपालकबाट संकलित सुनौलो जंगली फूलको मह। बाक्लो र सुगन्धित — चियामा, रोटीमा वा सिधै चम्चाले।',
+    productHoneyOrigin: 'गाउँका मौरीपालक',
+    productMadHoneyName: 'म्याड हनी',
+    productMadHoneyNote: 'दुर्लभ पहाडी फसल',
+    productMadHoneyDescription:
+      'अग्ला चट्टानका रोडोडेन्ड्रन फूलबाट आएको गाढा एम्बर मह। तीव्र सुगन्ध, परम्परागत रूपमा बहुमूल्य — कम मात्रामा र सावधानीपूर्वक।',
+    productMadHoneyOrigin: 'अग्ला हिमाली चट्टानहरू',
+    productSilajitName: 'शिलाजित',
+    productSilajitNote: 'खनिजयुक्त रेजिन',
+    productSilajitDescription:
+      'हिमाली चट्टानबाट संकलित टाँसिने रेजिन। माटोको खनिज स्वभाव — पुस्ताौंदेखि परम्परागत टोनिकका रूपमा प्रयोग।',
+    productSilajitOrigin: 'हिमाली चट्टानका दरारहरू',
+    productCordycepsName: 'यार्सागुम्बा',
+    productCordycepsNote: 'परम्परागत टोनिक',
+    productCordycepsDescription:
+      'स्थानीय स्वास्थ्य परम्परामा मूल्यवान सुकेको हिमाली यार्सागुम्बा। न्यानो, माटोको स्वाद — प्रायः उमालेर वा दैनिक टोनिकका रूपमा।',
+    productCordycepsOrigin: 'उच्च हिमाली घाँसे मैदान',
+    productSaffronName: 'केसर',
+    productSaffronNote: 'बहुमूल्य रातो तन्तु',
+    productSaffronDescription:
+      'मधुर सुगन्धसहितका नाजुक रातो तन्तु। एक चुटकीले भात, चिया र मिठाई रङ्गाउँछ — शुद्ध, सुगन्धित र सावधानीपूर्वक स्रोत।',
+    productSaffronOrigin: 'विश्वसनीय क्षेत्रीय उत्पादक',
   },
 } as const
 
