@@ -7,7 +7,7 @@
         <p class="section-lead">{{ t('missionLead') }}</p>
 
         <ul class="mission__promises">
-          <li v-for="promise in promises" :key="promise">
+          <li v-for="promise in localizedPromises" :key="promise">
             <Icon name="mdi:leaf" aria-hidden="true" />
             <span>{{ promise }}</span>
           </li>
@@ -41,9 +41,18 @@
 </template>
 
 <script setup lang="ts">
-import { promises } from '~/data/content'
+import type { MessageKey } from '~/data/messages'
 
 const { t } = useLocale()
+
+const promiseKeys = [
+  'promiseFairTrade',
+  'promiseFromVillagers',
+  'promiseLocalProducts',
+  'promiseGoodForAll',
+] as const satisfies readonly MessageKey[]
+
+const localizedPromises = computed(() => promiseKeys.map((key) => t(key)))
 </script>
 
 <style lang="scss" scoped>

@@ -12,13 +12,14 @@
         <span class="navbar__name">
           <strong>Healthy</strong>
           Organic Teas
-          <em>{{ brand.secondaryBrand }}</em>
+          <em>{{ t('stepLocal') }}</em>
         </span>
       </a>
 
       <button
         type="button"
         class="navbar__toggle"
+        :class="{ 'is-open': menuOpen }"
         :aria-expanded="menuOpen"
         aria-controls="nav-panel"
         :aria-label="menuOpen ? t('closeMenu') : t('openMenu')"
@@ -27,18 +28,8 @@
         <span /><span /><span />
       </button>
 
-      <nav
-        id="nav-panel"
-        class="navbar__links"
-        :class="{ 'is-open': menuOpen }"
-        aria-label="Primary"
-      >
-        <a
-          v-for="link in links"
-          :key="link.href"
-          :href="link.href"
-          @click="closeMenu"
-        >
+      <nav class="navbar__links navbar__links--desktop" aria-label="Primary">
+        <a v-for="link in links" :key="link.href" :href="link.href">
           {{ link.label }}
         </a>
         <div class="navbar__langs" role="group" aria-label="Language">
@@ -59,17 +50,64 @@
             {{ t('langNe') }}
           </button>
         </div>
-        <a class="navbar__cta" href="#contact" @click="closeMenu">
-          {{ t('navCta') }}
-        </a>
+        <a class="navbar__cta" href="#contact">{{ t('navCta') }}</a>
       </nav>
     </div>
+
+    <ClientOnly>
+      <Teleport to="body">
+        <div
+          v-show="menuOpen"
+          class="nav-shell__backdrop"
+          aria-hidden="true"
+          @click="closeMenu"
+        />
+        <aside
+          id="nav-panel"
+          class="nav-shell__drawer"
+          :class="{ 'is-open': menuOpen }"
+          :aria-hidden="!menuOpen"
+          aria-label="Primary"
+        >
+          <button
+            type="button"
+            class="nav-shell__close"
+            :aria-label="t('closeMenu')"
+            @click="closeMenu"
+          >
+            <Icon name="mdi:close" aria-hidden="true" />
+          </button>
+          <nav class="nav-shell__nav" @click="onDrawerNavClick">
+            <a v-for="link in links" :key="link.href" :href="link.href">
+              {{ link.label }}
+            </a>
+            <div class="nav-shell__langs" role="group" aria-label="Language">
+              <button
+                type="button"
+                class="nav-shell__lang"
+                :class="{ 'is-active': locale === 'en' }"
+                @click="setLocale('en')"
+              >
+                {{ t('langEn') }}
+              </button>
+              <button
+                type="button"
+                class="nav-shell__lang"
+                :class="{ 'is-active': locale === 'ne' }"
+                @click="setLocale('ne')"
+              >
+                {{ t('langNe') }}
+              </button>
+            </div>
+            <a class="nav-shell__cta" href="#contact"> {{ t('navCta') }} </a>
+          </nav>
+        </aside>
+      </Teleport>
+    </ClientOnly>
   </header>
 </template>
 
 <script setup lang="ts">
-import { brand } from '~/data/content'
-
 const { locale, t, setLocale } = useLocale()
 const menuOpen = ref(false)
 const scrolled = ref(false)
@@ -86,17 +124,41 @@ function closeMenu() {
   menuOpen.value = false
 }
 
+function onDrawerNavClick(event: MouseEvent) {
+  const target = event.target
+  if (!(target instanceof Element)) return
+  // Close on any link; language controls are <button>, so they stay open.
+  if (target.closest('a')) closeMenu()
+}
+
 function onScroll() {
   scrolled.value = window.scrollY > 24
 }
 
+function onKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape') closeMenu()
+}
+
+function onHashChange() {
+  if (menuOpen.value) closeMenu()
+}
+
+watch(menuOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
+
 onMounted(() => {
   onScroll()
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('keydown', onKeydown)
+  window.addEventListener('hashchange', onHashChange)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('keydown', onKeydown)
+  window.removeEventListener('hashchange', onHashChange)
+  document.body.style.overflow = ''
 })
 </script>
 
@@ -128,6 +190,8 @@ onUnmounted(() => {
     display: inline-flex;
     align-items: center;
     gap: 0.7rem;
+    position: relative;
+    z-index: 70;
   }
 
   &__mark {
@@ -161,25 +225,62 @@ onUnmounted(() => {
 
   &__toggle {
     display: none;
-    width: 2.5rem;
-    height: 2.5rem;
+    position: relative;
+    z-index: 70;
+    width: 2.75rem;
+    height: 2.75rem;
     border: 0;
     border-radius: var(--radius-sm);
     background: transparent;
     cursor: pointer;
-    padding: 0.55rem;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 0;
 
     span {
-      display: block;
+      position: absolute;
+      left: 0.65rem;
+      right: 0.65rem;
       height: 2px;
       background: var(--color-leaf-deep);
       border-radius: 2px;
+      transition:
+        top 0.28s var(--ease-out),
+        transform 0.28s var(--ease-out),
+        opacity 0.2s ease;
+    }
+
+    span:nth-child(1) {
+      top: 0.85rem;
+    }
+
+    span:nth-child(2) {
+      top: 50%;
+      margin-top: -1px;
+    }
+
+    span:nth-child(3) {
+      top: calc(100% - 0.85rem - 2px);
+    }
+
+    &.is-open span:nth-child(1),
+    &.is-open span:nth-child(3) {
+      top: 50%;
+      margin-top: -1px;
+    }
+
+    &.is-open span:nth-child(1) {
+      transform: rotate(45deg);
+    }
+
+    &.is-open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    &.is-open span:nth-child(3) {
+      transform: rotate(-45deg);
     }
   }
 
-  &__links {
+  &__links--desktop {
     display: flex;
     align-items: center;
     gap: 0.35rem 1.35rem;
@@ -245,56 +346,154 @@ onUnmounted(() => {
 @media (max-width: 48rem) {
   .navbar {
     &__toggle {
-      display: flex;
-      z-index: 60;
+      display: block;
     }
 
-    &__links {
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: center;
-      gap: 0.35rem;
-      padding: 5.5rem var(--container-px) 2rem;
-      border-radius: 0;
-      background: rgb(247 250 247 / 98%);
-      backdrop-filter: blur(12px);
-      box-shadow: none;
-      border: 0;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-12px);
-      transition:
-        opacity 0.28s ease,
-        transform 0.28s ease;
+    &__links--desktop {
+      display: none;
+    }
 
-      &.is-open {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-      }
-
-      a {
-        padding: 0.95rem 1rem;
-        border-radius: var(--radius-md);
-        font-size: 1.15rem;
-        color: var(--color-leaf-deep);
-      }
-
-      .navbar__langs {
-        align-self: flex-start;
-        margin: 0.5rem 0.35rem;
-      }
-
-      .navbar__cta {
-        justify-content: center;
-        margin-top: 0.75rem;
-        min-height: 3rem;
+    &__name {
+      strong {
         font-size: 1.05rem;
       }
+
+      em {
+        display: none;
+      }
     }
+  }
+}
+</style>
+
+<style lang="scss">
+.nav-shell__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 65;
+  background: rgb(12 32 22 / 45%);
+  animation: nav-shell-fade 0.28s ease both;
+}
+
+.nav-shell__drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 66;
+  width: min(19.5rem, 86vw);
+  height: 100dvh;
+  padding: 4.5rem 1.35rem 1.75rem;
+  background: #f7faf7;
+  box-shadow: -12px 0 40px rgb(12 32 22 / 18%);
+  transform: translateX(105%);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow-y: auto;
+  pointer-events: none;
+
+  &.is-open {
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+}
+
+.nav-shell__close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 0.65rem;
+  background: transparent;
+  color: #1f5c3a;
+  cursor: pointer;
+
+  .iconify {
+    font-size: 1.55rem;
+  }
+
+  &:hover {
+    background: rgb(31 92 58 / 8%);
+  }
+}
+
+.nav-shell__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.25rem;
+
+  a {
+    padding: 0.9rem 0.85rem;
+    border-radius: 0.75rem;
+    font-size: 1.12rem;
+    font-weight: 600;
+    color: #1f5c3a;
+    text-decoration: none;
+  }
+}
+
+.nav-shell__langs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  align-self: flex-start;
+  margin: 0.55rem 0.35rem;
+  padding: 0.2rem;
+  border-radius: 999px;
+  background: rgb(31 92 58 / 8%);
+}
+
+.nav-shell__lang {
+  min-width: 2.2rem;
+  height: 1.85rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #5a7264;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+
+  &.is-active {
+    background: #1f5c3a;
+    color: #fff;
+  }
+}
+
+.nav-shell__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.65rem;
+  min-height: 3rem;
+  padding: 0.55rem 1rem;
+  border-radius: 0.85rem;
+  background: #1f5c3a;
+  color: #fff !important;
+  font-size: 1.05rem;
+  font-weight: 600 !important;
+  text-decoration: none;
+}
+
+@keyframes nav-shell-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 48.01rem) {
+  .nav-shell__backdrop,
+  .nav-shell__drawer {
+    display: none !important;
   }
 }
 </style>

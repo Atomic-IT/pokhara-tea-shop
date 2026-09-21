@@ -5,8 +5,8 @@
         <img src="/logo.svg" width="36" height="36" alt="" />
         <div>
           <p class="footer__name">{{ brand.name }}</p>
-          <p class="footer__step">{{ brand.secondaryBrand }}</p>
-          <p class="footer__tag">{{ brand.tagline }}</p>
+          <p class="footer__step">{{ t('stepLocal') }}</p>
+          <p class="footer__tag">{{ t('tagline') }}</p>
         </div>
       </div>
 
@@ -34,7 +34,7 @@
       <p class="footer__note">{{ t('footerNote') }}</p>
 
       <p class="footer__copy">
-        © {{ year }} {{ brand.name }}. All rights reserved.
+        © {{ year }} {{ brand.name }}. {{ t('rightsReserved') }}
       </p>
     </div>
   </footer>
